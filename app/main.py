@@ -33,7 +33,7 @@ class TaskCreate(BaseModel):
 # --- RUTAS DE NAVEGACIÓN ---
 @app.get("/")
 async def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="index.html")
 
 # --- API DE USUARIOS ---
 @app.get("/api/users")
