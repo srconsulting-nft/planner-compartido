@@ -1,0 +1,124 @@
+:root {
+    --p: #6366f1;
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-h: #334155;
+    --text: #f8fafc;
+    --dim: #94a3b8;
+    --success: #10b981;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
+
+#app { max-width: 500px; margin: 0 auto; min-height: 100vh; position: relative; }
+
+.view { display: none; padding: 1.5rem; animation: slideIn 0.3s ease-out; }
+.view.active { display: block; }
+
+@keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Selector de Usuario */
+.hero { text-align: center; margin: 4rem 0; }
+.hero h1 { font-size: 2.5rem; margin: 0; background: linear-gradient(to right, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.users-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+.user-card { background: var(--card); padding: 1.5rem; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: 0.2s; cursor: pointer; }
+.user-card h3 { margin: 0; font-weight: 400; font-size: 1.1rem; }
+.user-card:active { transform: scale(0.95); background: var(--p); }
+
+/* Agenda AppBar */
+.app-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.user-chip { background: var(--card); padding: 0.5rem 1rem; border-radius: 30px; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.1); }
+.btn-icon { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+
+/* Calendar Strip */
+.calendar-strip { display: flex; justify-content: space-between; margin-bottom: 2.5rem; }
+.day-pill { text-align: center; padding: 12px 10px; border-radius: 12px; cursor: pointer; width: calc(100% / 7.5); transition: 0.2s; }
+.day-pill span { display: block; font-size: 0.75rem; color: var(--dim); text-transform: uppercase; margin-bottom: 4px; }
+.day-pill b { font-size: 1.1rem; }
+.day-pill.active { background: var(--p); color: white; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4); }
+.day-pill.active span { color: rgba(255,255,255,0.8); }
+
+/* Task List */
+.section-title { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; }
+.section-title h2 { margin: 0; font-size: 1.4rem; }
+.section-title span { color: var(--dim); font-size: 0.9rem; }
+
+.tasks-list { display: flex; flex-direction: column; gap: 1rem; padding-bottom: 100px; }
+.task-item { background: var(--card); padding: 1.2rem; border-radius: 18px; display: flex; align-items: center; justify-content: space-between; transition: 0.3s; border: 1px solid transparent; }
+.task-item.completed { opacity: 0.5; border: 1px solid var(--success); }
+.task-item.completed h4 { text-decoration: line-through; }
+.task-info h4 { margin: 0 0 5px 0; font-weight: 600; }
+.task-info p { margin: 0; font-size: 0.85rem; color: var(--dim); }
+
+/* Checkbox Modern */
+input[type="checkbox"] { appearance: none; width: 28px; height: 28px; border: 2px solid var(--dim); border-radius: 50%; cursor: pointer; position: relative; transition: 0.2s; }
+input[type="checkbox"]:checked { background: var(--success); border-color: var(--success); }
+input[type="checkbox"]:checked::after { content: '✓'; color: white; position: absolute; left: 6px; top: 1px; font-weight: bold; }
+
+/* FAB */
+.btn-delete { background: none; border: none; font-size: 1.2rem; cursor: pointer; padding: 5px; opacity: 0.6; }
+.btn-delete:active { opacity: 1; transform: scale(1.2); }
+
+.delete-mini { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.2); border: none; color: white; border-radius: 50%; width: 24px; height: 24px; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+.task-actions { display: flex; align-items: center; gap: 0.8rem; }
+.user-card { position: relative; }
+
+/* Modals */
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; align-items: flex-end; z-index: 200; backdrop-filter: blur(4px); }
+.modal.active { display: flex; }
+.modal-content { background: var(--card); width: 100%; border-radius: 30px 30px 0 0; padding: 2.5rem; animation: slideUp 0.3s ease-out; }
+
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+.modal-content h3 { margin-top: 0; margin-bottom: 1.5rem; }
+input, textarea, select { width: 100%; background: var(--bg); border: 1px solid var(--card-h); color: white; padding: 1rem; border-radius: 12px; margin-bottom: 1rem; font-family: inherit; font-size: 1rem; }
+.input-group { margin-bottom: 1rem; }
+.input-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: var(--dim); }
+
+.modal-buttons { display: flex; gap: 1rem; margin-top: 1rem; }
+.btn-primary { background: var(--p); color: white; border: none; padding: 1rem; border-radius: 12px; flex: 1; font-weight: 600; cursor: pointer; }
+.btn-text { background: none; border: none; color: var(--dim); padding: 1rem; flex: 1; cursor: pointer; }
+
+.btn-primary:active { background: #4f46e5; }
+
+/* Branding */
+.branding-mini { font-size: 0.8rem; color: var(--dim); margin-top: 1rem; letter-spacing: 1px; }
+
+/* Barra de Navegación Inferior */
+.bottom-nav { 
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 70px; 
+    background: var(--glass); 
+    backdrop-filter: blur(15px); 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    border-top: 1px solid rgba(255,255,255,0.05); 
+    z-index: 150; 
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-item { 
+    background: none; 
+    border: none; 
+    color: var(--dim); 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    font-family: inherit; 
+    font-size: 0.75rem; 
+    cursor: pointer; 
+    transition: 0.2s; 
+}
+
+.nav-item i { font-style: normal; font-size: 1.4rem; margin-bottom: 2px; }
+.nav-item:active { color: var(--p); transform: scale(1.1); }
+
+/* Ajustar vistas para que no las tape la barra */
+.view { padding-bottom: 100px; }

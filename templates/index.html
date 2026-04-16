@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Planner Compartido</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- PANTALLA: SELECTOR DE USUARIO -->
+        <section id="view-selector" class="view active">
+            <div class="hero">
+                <h1>Planner</h1>
+                <p>Gestiona el equipo desde tu móvil</p>
+                <div class="branding-mini">Powered by La Famil.IA</div>
+            </div>
+            <div id="users-grid" class="users-grid">
+                <!-- Se carga dinámicamente -->
+            </div>
+            <div class="main-actions">
+                <button onclick="openModal('modal-user')" class="btn-primary">Añadir Perfil</button>
+            </div>
+        </section>
+
+        <!-- PANTALLA: AGENDA PRINCIPAL -->
+        <section id="view-agenda" class="view">
+            <header class="app-bar">
+                <div class="user-chip" onclick="logout()">
+                    <span id="label-user">Usuario</span>
+                </div>
+                <button onclick="exportExcel()" class="btn-icon">📊</button>
+            </header>
+
+            <!-- Selector Semanal -->
+            <div class="calendar-strip" id="week-strip">
+                <!-- Días de la semana -->
+            </div>
+
+            <div class="tasks-container">
+                <div class="section-title">
+                    <h2 id="selected-date-label">Hoy</h2>
+                    <span id="task-count">0 tareas</span>
+                </div>
+                <div id="tasks-list" class="tasks-list">
+                    <!-- Tareas cargadas dinámicamente -->
+                </div>
+            </div>
+
+            <button class="fab" onclick="openModal('modal-task')">+</button>
+        </section>
+
+        <!-- Barra de Navegación Inferior -->
+        <nav class="bottom-nav">
+          <button class="nav-item" onclick="switchView('view-selector')">
+            <i>🏠</i>
+            <span>Inicio</span>
+          </button>
+          <button class="nav-item" onclick="switchView('view-agenda')">
+            <i>📅</i>
+            <span>Tareas</span>
+          </button>
+          <button class="nav-item" onclick="exitApp()">
+            <i>🚀</i>
+            <span>Salir</span>
+          </button>
+        </nav>
+
+        <!-- MODAL: NUEVA TAREA -->
+        <div id="modal-task" class="modal">
+            <div class="modal-content">
+                <h3>Nueva Tarea</h3>
+                <input type="text" id="task-title" placeholder="¿Qué hay que hacer?">
+                <textarea id="task-desc" placeholder="Descripción (opcional)"></textarea>
+                
+                <div class="input-group">
+                    <label>Tipo de Tarea:</label>
+                    <select id="task-type">
+                        <option value="deadline">📅 Con fecha límite</option>
+                        <option value="permanent">🔄 Recurrente (Diaria)</option>
+                    </select>
+                </div>
+
+                <div class="input-group" id="date-input-group">
+                    <label>Fecha:</label>
+                    <input type="date" id="task-date">
+                </div>
+
+                <div class="modal-buttons">
+                    <button onclick="closeModal('modal-task')" class="btn-text">Cancelar</button>
+                    <button onclick="saveTask()" class="btn-primary">Guardar Tarea</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: NUEVO USUARIO -->
+        <div id="modal-user" class="modal">
+            <div class="modal-content">
+                <h3>Nuevo Perfil</h3>
+                <input type="text" id="user-name" placeholder="Nombre completo">
+                <div class="modal-buttons">
+                    <button onclick="closeModal('modal-user')" class="btn-text">Cancelar</button>
+                    <button onclick="saveUser()" class="btn-primary">Crear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
